@@ -1,20 +1,20 @@
 docker-build-prod:
-	docker-compose -f docker-compose-prod.yml build
+	docker-compose -f compose-prod.yml build
 
 docker-build-dev:
-	docker-compose -f docker-compose-dev.yml build
+	docker-compose -f compose-dev.yml build
 
 docker-up-background-prod:
-	docker-compose -f docker-compose-prod.yml up -d
+	docker-compose -f compose-prod.yml up -d
 
 docker-up-background-dev:
-	docker-compose -f docker-compose-dev.yml up -d
+	docker-compose -f compose-dev.yml up -d
 
 docker-up-prod:
-	docker-compose -f docker-compose-prod.yml up
+	docker-compose -f compose-prod.yml up
 
 docker-up-dev:
-	docker-compose -f docker-compose-dev.yml up
+	docker-compose -f compose-dev.yml up
 
 ssh-django:
 	docker exec -ti django_server bash
