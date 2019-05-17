@@ -1,5 +1,5 @@
 # Import all base requirements
--r base.txt
+-r default.txt
 
 # WSGI Handler
 gunicorn==19.6.0

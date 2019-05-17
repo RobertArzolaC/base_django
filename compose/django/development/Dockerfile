@@ -8,7 +8,7 @@ ENV PYTHONUNBUFFERED 1
 COPY ./requirements /requirements
 
 # Install dependencies.
-RUN pip install -r /requirements/local.txt
+RUN pip install -r /requirements/development.txt
 
 # Set work directory.
 WORKDIR /src
