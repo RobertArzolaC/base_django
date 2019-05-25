@@ -42,10 +42,10 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     'allauth',
-    'allauth.account',
+    'rest_auth',
     'rest_framework',
+    'allauth.account',
     'rest_framework.authtoken',
-    'rest_auth'
 ]
 
 LOCAL_APPS = [
