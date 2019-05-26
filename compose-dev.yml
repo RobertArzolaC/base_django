@@ -2,6 +2,7 @@ version: '2'
 
 services:
   postgres:
+    restart: always
     container_name: postgres_server
     build: ./compose/postgres
     volumes:
@@ -25,6 +26,7 @@ services:
   #   env_file: .env
     
   django:
+    restart: always
     container_name: django_server
     build:
       context: .
@@ -41,6 +43,20 @@ services:
       - "8000:8000"
     links:
       - postgres
+
+  nginx:
+    restart: always
+    container_name: nginx_server
+    build:
+      context: .
+      dockerfile: ./compose/nginx/development/Dockerfile
+    depends_on:
+      - django
+    command: nginx -g 'daemon off;'
+    ports:
+      - "80:80"
+    volumes:
+      - ./static:/var/www/static
 
 volumes:
   # esdata:

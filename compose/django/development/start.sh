@@ -1,4 +1,5 @@
 #!/bin/sh
 python manage.py makemigrations
 python manage.py migrate
-/usr/local/bin/gunicorn config.wsgi:application -w 2
+python manage.py collectstatic --no-input
+gunicorn config.wsgi -w 2 --bind 0.0.0.0:8000
