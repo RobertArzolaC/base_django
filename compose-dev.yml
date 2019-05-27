@@ -1,17 +1,6 @@
 version: '2'
 
 services:
-  postgres:
-    restart: always
-    container_name: postgres_server
-    build: ./compose/postgres
-    volumes:
-      - postgres_data_dev:/var/lib/postgresql/data
-      - postgres_backup_dev:/backups
-    ports:
-      - "5100:5432"
-    env_file: .env
-
   # elasticsearch:
   #   container_name: es_server
   #   build: ./compose/elasticsearch
@@ -24,7 +13,18 @@ services:
   #   ports:
   #     - 9200:9200
   #   env_file: .env
-    
+
+  postgres:
+    restart: always
+    container_name: postgres_server
+    build: ./compose/postgres
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+      - postgres_backup_dev:/backups
+    ports:
+      - "5100:5432"
+    env_file: .env
+
   django:
     restart: always
     container_name: django_server
@@ -36,7 +36,6 @@ services:
       # - elasticsearch
       - postgres
     env_file: .env
-    restart: always
     volumes:
       - .:/app
     ports:
@@ -55,8 +54,8 @@ services:
     command: nginx -g 'daemon off;'
     ports:
       - "80:80"
-    volumes:
-      - ./static:/var/www/static
+    volumes_from:
+      - django:rw
 
 volumes:
   # esdata:
