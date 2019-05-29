@@ -2,3 +2,10 @@ FROM nginx:latest
 
 RUN rm /etc/nginx/conf.d/default.conf
 ADD ./compose/nginx/development/nginx.conf /etc/nginx/nginx.conf
+
+RUN mkdir /var/www
+RUN mkdir /var/www/static
+
+WORKDIR /var/www/static
+ADD /static .
+RUN chown -R nginx:nginx /var/www/static

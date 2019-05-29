@@ -38,6 +38,7 @@ services:
     env_file: .env
     volumes:
       - .:/app
+      - ./static:/src/static
     ports:
       - "8000:8000"
     links:
@@ -54,8 +55,6 @@ services:
     command: nginx -g 'daemon off;'
     ports:
       - "80:80"
-    volumes_from:
-      - django:rw
 
 volumes:
   # esdata:
