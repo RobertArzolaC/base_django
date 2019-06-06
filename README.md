@@ -1,4 +1,4 @@
-# Example project for a Dockerized Django REST, Gunicorn and Nginx in Development
+# Example Project for a Dockerized Django REST, Gunicorn and Nginx in Development
 
 This is a small contribution for the community in order to facilitate the development of applications.
 
@@ -40,7 +40,7 @@ make docker-build-dev
 make docker-up-dev
 ```
 
-Visit [http://localhost](http://localhost/admin). You should see admin django ;)
+Visit [http://localhost/admin](http://localhost/admin). You should see admin django ;)
 
 
 ## Languages used
