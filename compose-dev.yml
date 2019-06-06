@@ -1,0 +1,65 @@
+version: '2'
+
+services:
+  # elasticsearch:
+  #   container_name: es_server
+  #   build: ./docker/elasticsearch
+  #   ulimits:
+  #     memlock:
+  #       soft: -1
+  #       hard: -1
+  #   volumes:
+  #     - esdata:/usr/share/elasticsearch/data
+  #   ports:
+  #     - 9200:9200
+  #   env_file: .env
+
+  postgres:
+    restart: always
+    container_name: postgres_server
+    build: ./docker/postgres
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+      - postgres_backup_dev:/backups
+    ports:
+      - "5100:5432"
+    env_file: .env
+
+  django:
+    restart: always
+    container_name: django_server
+    build:
+      context: .
+      dockerfile: ./docker/django/development/Dockerfile
+    command: /start.sh
+    depends_on:
+      # - elasticsearch
+      - postgres
+    env_file: .env
+    volumes:
+      - .:/app
+      - ./static:/src/static
+    ports:
+      - "8000:8000"
+    links:
+      - postgres
+
+  nginx:
+    restart: always
+    container_name: nginx_server
+    build:
+      context: .
+      dockerfile: ./docker/nginx/development/Dockerfile
+    depends_on:
+      - django
+    command: nginx -g 'daemon off;'
+    ports:
+      - "80:80"
+
+volumes:
+  # esdata:
+  #   driver: local
+  postgres_data_dev:
+    driver: local
+  postgres_backup_dev:
+    driver: local

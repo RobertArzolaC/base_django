@@ -1,0 +1,14 @@
+# Django
+django==2.1.7
+
+# Django 3rd party modules
+django-allauth==0.39.0
+django-rest-auth==0.9.3
+djangorestframework==3.9.1
+djangorestframework-jwt==1.11.0
+
+# Python-PostgreSQL Database Adapter
+psycopg2-binary==2.7.7
+
+# Time zones support
+pytz==2018.9
