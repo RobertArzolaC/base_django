@@ -20,8 +20,8 @@ COPY . /app
 RUN chown -R django /app
 
 # Copy files.
-COPY ./compose/django/production/start.sh /start.sh
-COPY ./compose/django/entrypoint.sh /entrypoint.sh
+COPY ./docker/django/production/start.sh /start.sh
+COPY ./docker/django/entrypoint.sh /entrypoint.sh
 
 # Run migrations and test db.
 RUN sed -i 's/\r//' /entrypoint.sh \
