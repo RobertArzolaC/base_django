@@ -1,21 +1,59 @@
+import json
+
+from django.urls import reverse
 from django.test import TestCase
+from django.contrib.auth.models import User
 
-class AuthLoginUserTest(BaseViewTest):
-    """
-    Tests for the auth/login/ endpoint
-    """
+from rest_framework.views import status
+from rest_framework.test import APITestCase, APIClient
 
-    def test_login_user_with_valid_credentials(self):
-        # test login with valid credentials
-        response = self.login_a_user("test_user", "testing")
-        # assert token key exists
-        self.assertIn("token", response.data)
-        # assert status code is 200 OK
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        # test login with invalid credentials
-        response = self.login_a_user("anonymous", "pass")
-        # assert status code is 401 UNAUTHORIZED
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+class BaseViewTest(APITestCase):
+    client = APIClient()
+
+    def login_client(self, username="", password=""):
+        # get a token from DRF
+        response = self.client.post(
+            reverse("create-token"),
+            data=json.dumps(
+                {
+                    'username': username,
+                    'password': password
+                }
+            ),
+            content_type='application/json'
+        )
+        self.token = response.data['token']
+        self.status_code = response.status_code
+        # set the token in the header
+        self.client.credentials(
+            HTTP_AUTHORIZATION='Bearer ' + self.token
+        )
+        self.client.login(username=username, password=password)
+        return self.token, self.status_code
+
+    def register_a_user(self, username="", password="", email=""):
+        return self.client.post(
+            reverse("auth-register"),
+            data=json.dumps(
+                {
+                    "username": username,
+                    "password": password,
+                    "email": email
+                }
+            ),
+            content_type='application/json'
+        )
+    
+    def setUp(self):
+        # create a admin user
+        self.user = User.objects.create_superuser(
+            username="test_user",
+            email="test@mail.com",
+            password="testing",
+            first_name="test",
+            last_name="user",
+        )
 
 
 class AuthRegisterUserTest(BaseViewTest):
@@ -31,5 +69,18 @@ class AuthRegisterUserTest(BaseViewTest):
         # test with invalid data
         response = self.register_a_user()
         # assert status code
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)# Create your tests here.
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+
+class AuthLoginUserTest(BaseViewTest):
+    """
+    Tests for the auth/login/ endpoint
+    """
+
+    def test_login_user_with_token(self):
+        # test login with valid credentials
+        token, std_code = self.login_client("test_user", "testing")
+        # assert status code
+        self.assertEqual(std_code, status.HTTP_200_OK)
+        # assert token
+        self.assertEqual(len(token), 184)

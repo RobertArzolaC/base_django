@@ -37,8 +37,7 @@ services:
       - postgres
     env_file: .env
     volumes:
-      - .:/app
-      - ./static:/src/static
+      - .:/src
     ports:
       - "8000:8000"
     links:
