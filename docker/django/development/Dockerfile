@@ -9,6 +9,7 @@ COPY . /src
 WORKDIR /src
 
 # Install dependencies.
+RUN pip install --upgrade pip
 RUN pip install -r ./requirements/development.txt
 
 # Copy files.
