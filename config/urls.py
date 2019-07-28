@@ -7,7 +7,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth-user/', include('apps.auth_user.urls')),
+    path('auth/', include('apps.core.urls')),
     path('api-token-auth/', obtain_jwt_token, name='create-token'),
     path('api/', include('rest_framework.urls', namespace='rest_framework'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
