@@ -1,19 +1,6 @@
 version: '2'
 
 services:
-  # elasticsearch:
-  #   container_name: es_server
-  #   build: ./docker/elasticsearch
-  #   ulimits:
-  #     memlock:
-  #       soft: -1
-  #       hard: -1
-  #   volumes:
-  #     - esdata:/usr/share/elasticsearch/data
-  #   ports:
-  #     - 9200:9200
-  #   env_file: .env
-
   postgres:
     restart: always
     container_name: postgres_server
@@ -33,7 +20,6 @@ services:
       dockerfile: ./docker/django/development/Dockerfile
     command: /start.sh
     depends_on:
-      # - elasticsearch
       - postgres
     env_file: .env
     volumes:
@@ -56,8 +42,6 @@ services:
       - "80:80"
 
 volumes:
-  # esdata:
-  #   driver: local
   postgres_data_dev:
     driver: local
   postgres_backup_dev:

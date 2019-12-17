@@ -38,3 +38,9 @@ docker-clean-up:
 
 es-max-mv:
 	sudo sysctl -w vm.max_map_count=262144
+
+docker-stop-all:
+	docker container stop $(shell docker container ls -aq)
+
+ps:
+	docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}\t{{.Names}}"
