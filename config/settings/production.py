@@ -1,11 +1,26 @@
 from .default import *
 
+
+# Database
+# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('POSTGRES_DB', 'postgres'),
+        'USER': os.environ.get('POSTGRES_USER', 'postgres'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
+        'HOST': 'postgres',
+        'PORT': 5432,
+    }
+}
+
 # Use Whitenoise to serve static files
 # ------------------------------------------------------------------------------
 # https://whitenoise.readthedocs.io/
 
-MIDDLEWARE = DJANGO_SECURITY_MIDDLEWARE + [
-    'whitenoise.middleware.WhiteNoiseMiddleware'] + DJANGO_MIDDLEWARE
+MIDDLEWARE = DJANGO_SECURITY_MIDDLEWARE
+MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware'] + DJANGO_MIDDLEWARE
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
@@ -48,11 +63,17 @@ INSTALLED_APPS += ['gunicorn']
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'filters': {'require_debug_false': {
-        '()': 'django.utils.log.RequireDebugFalse'}},
-    'formatters': {'verbose': {
-        'format': '%(levelname)s %(asctime)s %(module)s '
-                  '%(process)d %(thread)d %(message)s'}},
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s '
+                '%(process)d %(thread)d %(message)s'
+        }
+    },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
@@ -61,13 +82,19 @@ LOGGING = {
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'formatter': 'verbose'}},
+            'formatter': 'verbose'
+        }
+    },
     'loggers': {
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
-            'propagate': True},
+            'propagate': True
+        },
         'django.security.DisallowedHost': {
             'level': 'ERROR',
             'handlers': ['console', 'mail_admins'],
-            'propagate': True}}}
+            'propagate': True
+        }
+    }
+}
