@@ -16,12 +16,6 @@ This is an example of a project that uses the following technologies:
 
 
 ## Setup Local Environment
-### First things, first. Clone the repo
-
-```
-git clone https://github.com/RobertArzolaC/base_django.git
-```
-
 
 ### To setup a Dockerized development environment
 
