@@ -18,3 +18,6 @@ COPY ./docker/django/development/start.sh /start.sh
 
 # Run migrations and test db.
 RUN sed -i 's/\r//' /start.sh && chmod +x /start.sh
+
+# Run start.sh.
+CMD ["/start.sh"]

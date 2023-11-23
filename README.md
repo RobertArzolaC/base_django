@@ -1,4 +1,6 @@
-# Example Project for a Dockerized Django REST, Gunicorn and Nginx in Development
+Use this template to build a django project dockerized with docker-compose.
+
+## Example Project for a Dockerized Django REST, Gunicorn and Nginx in Development
 
 This is a small contribution for the community in order to facilitate the development of applications.
 
@@ -50,11 +52,11 @@ Visit [http://localhost/admin](http://localhost/admin). You should see admin dja
 ## Tools used
 + [Nginx](https://www.nginx.com/)
 + [Gunicorn](https://gunicorn.org/)
-+ [Docker 1.12.1](https://www.docker.com/)
-+ [Django 2.1.7](https://www.djangoproject.com/)
-+ [PostgreSQL 9.6.0](http://www.postgresql.org/)
-+ [Docker compose 1.8.0](https://docs.docker.com/compose/)
-+ [Django REST Framework 3.9.1](http://www.django-rest-framework.org/)
++ [Docker](https://www.docker.com/)
++ [Django](https://www.djangoproject.com/)
++ [PostgreSQL](http://www.postgresql.org/)
++ [Docker compose](https://docs.docker.com/compose/)
++ [Django REST Framework](http://www.django-rest-framework.org/)
 
 
 ## Helpful resources

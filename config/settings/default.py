@@ -27,7 +27,9 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    "rest_framework_simplejwt",
     'rest_framework',
+    "easyaudit"
 ]
 
 LOCAL_APPS = [
@@ -45,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "easyaudit.middleware.easyaudit.EasyAuditMiddleware"
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -103,12 +106,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+# Django Rest Framework
+# https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 REST_PATH = "rest_framework."
 REST_FRAMEWORK = {
     # Authentication settings
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     # Permission settings
     'DEFAULT_PERMISSION_CLASSES': [
@@ -118,3 +123,5 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': f'{REST_PATH}pagination.LimitOffsetPagination',
     'PAGE_SIZE': 20
 }
+
+SITE_ID = 1
