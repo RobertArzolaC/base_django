@@ -27,13 +27,7 @@ git clone https://github.com/RobertArzolaC/base_django.git
 
 In my opinion, this is the easiest way to get up and running.
 
-
-#### 1. Create `.env` file
-
-[Example .env file](https://docs.google.com/document/d/1tdUjDeGbmv6caLwLjt6ctVBVBOO-ZcTnEsHvMWM_rz0/edit?usp=sharing)
-
-
-#### 2. Build docker container
+#### 1. Build docker container
 
 ```
 make docker-build-dev

@@ -11,7 +11,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - postgres_backup:/backups
-    env_file: .env
+    env_file: .env.prod
 
   django:
     container_name: django_server
@@ -22,7 +22,7 @@ services:
     depends_on:
       - postgres
     command: /start.sh
-    env_file: .env
+    env_file: .env.prod
 
   nginx:
     container_name: nginx_server
