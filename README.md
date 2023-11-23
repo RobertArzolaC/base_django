@@ -1,4 +1,4 @@
-# Example Project for a Dockerized Django REST, Gunicorn and Nginx
+# Project for a Dockerized Django REST, Gunicorn and Nginx
 
 This is a small contribution for the community in order to facilitate the development of applications.
 
