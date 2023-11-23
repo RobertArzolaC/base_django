@@ -1,6 +1,4 @@
-# Use this template to build a django project dockerized with docker-compose.
-
-## Example Project for a Dockerized Django REST, Gunicorn and Nginx in Development
+## Use this template to build a django project dockerized with docker-compose.
 
 This is a small contribution for the community in order to facilitate the development of applications.
 
